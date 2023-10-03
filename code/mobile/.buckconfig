@@ -1,4 +1,35 @@
 
+Stage Logs (Build)
+ Shell Script -- npm install (self time 386ms)
++ npm install
+/var/jenkins_home/workspace/App Test/code/web@tmp/durable-402bc121/script.sh: 1: npm: not found
+
+pipeline {
+     agent any
+     stages {
+         stage ( 'Git Pull' ) {
+             steps {
+              git 'https://github.com/atulmy/crate.git'  
+             }
+         }
+         stage ( 'Build' ) {
+             steps {
+               dir('code/web'){
+                   sh 'npm install'
+               }
+               
+             }
+         }
+         stage ( 'Test Run' ) {
+             steps {
+                 dir('code/web') {
+                     sh 'npm start'
+                 }
+                  
+             }
+         }
+     }
+}
 [android]
   target = Google Inc.:Google APIs:23
 
